@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		.github\workflows\dotnet-desktop.yml = .github\workflows\dotnet-desktop.yml
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
@@ -38,5 +40,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27B270C3-053C-4918-9EE5-E79B37BE96E2}
 	EndGlobalSection
 EndGlobal
