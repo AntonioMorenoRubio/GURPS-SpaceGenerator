@@ -30,6 +30,50 @@ namespace GeneratorLibrary.Tests
             Assert.Equal(description, planet.Description);
         }
 
+        [Theory]
+        [InlineData(PlanetType.Ice)]
+        [InlineData(PlanetType.Hadean)]
+        [InlineData(PlanetType.Rock)]
+        [InlineData(PlanetType.Ammonia)]
+        [InlineData(PlanetType.Greenhouse)]
+        [InlineData(PlanetType.Sulfur)]
+        [InlineData(PlanetType.Ocean)]
+        [InlineData(PlanetType.Garden)]
+        [InlineData(PlanetType.AsteroidBelt)]
+        [InlineData(PlanetType.GasGiant)]
+        [InlineData(PlanetType.Chthonian)]
+        public void CanCreateWorldBasedOnType(PlanetType type)
+        {
+            var planet = new PlanetModel("Test", type, PlanetSize.Standard);
+            Assert.True(planet.WorldType.Type.Equals(type));
+        }
 
+        [Theory]
+        [InlineData(PlanetSize.Tiny)]
+        [InlineData(PlanetSize.Small)]
+        [InlineData(PlanetSize.Standard)]
+        [InlineData(PlanetSize.Large)]
+        [InlineData(PlanetSize.Special)]
+        public void CanCreateWorldBasedOnSize(PlanetSize size)
+        {
+            var planet = new PlanetModel("Test", PlanetType.Ice, size);
+            Assert.True(planet.WorldType.Size.Equals(size));
+        }
+
+        [Theory]
+        [InlineData(PlanetSize.Tiny)]
+        [InlineData(PlanetSize.Small)]
+        [InlineData(PlanetSize.Standard)]
+        [InlineData(PlanetSize.Large)]
+        [InlineData(PlanetSize.Special)]
+        public void CanCreateOnlyStandardAndLargeSizedGardenWorlds(PlanetSize size)
+        {
+            PlanetModel planet = new PlanetModel("Test", PlanetType.Garden, size);
+
+            if (size == PlanetSize.Standard || size == PlanetSize.Large)
+                Assert.True(planet.WorldType.Type == PlanetType.Garden && planet.WorldType.Size == size);
+            else
+                Assert.Fail("Not Implemented Yet.");
+        }
     }
 }

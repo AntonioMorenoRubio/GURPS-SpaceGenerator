@@ -10,9 +10,7 @@ namespace GeneratorLibrary
     {
         public string Name { get; set; }
         public string Description { get; set; }
-
-        public PlanetType Type { get; set; }
-        public PlanetSize Size { get; set; }
+        public WorldTypeModel WorldType { get; set; }
 
         public PlanetModel() { }
 
@@ -20,6 +18,13 @@ namespace GeneratorLibrary
         {
             Name = name;
             Description = description;
+        }
+
+        public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
+        {
+            Name = name;
+            Description = description;
+            WorldType = new WorldTypeModel(type, size);
         }
 
         public override string ToString()
