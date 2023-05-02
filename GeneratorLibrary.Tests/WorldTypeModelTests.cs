@@ -17,7 +17,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void UsingTypeAndSize_IceCreatesAllButSpecialSized(PlanetSize size)
+        public void Ice_CanBe_AllButSpecialSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Ice;
 
@@ -36,7 +36,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyTinyAndSmallSizedRockWorlds(PlanetSize size)
+        public void Rock_CanOnlyBe_TinyAndSmallSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Rock;
 
@@ -55,7 +55,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyTinySizedSulfurWorlds(PlanetSize size)
+        public void Sulfur_CanOnlyBe_TinySize(PlanetSize size)
         {
             PlanetType type = PlanetType.Sulfur;
 
@@ -74,7 +74,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlySmallAndStandardSizedHadeanWorlds(PlanetSize size)
+        public void Hadean_CanOnlyBe_SmallAndStandardSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Hadean;
 
@@ -93,7 +93,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyStandardAndLargeSizedOceanWorlds(PlanetSize size)
+        public void Ocean_CanOnlyBe_StandardAndLargeSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Ocean;
 
@@ -112,7 +112,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyStandardAndLargeSizedGardenWorlds(PlanetSize size)
+        public void Garden_CanOnlyBe_StandardAndLargeSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Garden;
 
@@ -131,7 +131,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyStandardAndLargeSizedGreenhouseWorlds(PlanetSize size)
+        public void Greenhouse_CanOnlyBe_StandardAndLargeSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Greenhouse;
 
@@ -150,7 +150,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyStandardAndLargeSizedAmmoniaWorlds(PlanetSize size)
+        public void Ammonia_CanOnlyBe_StandardAndLargeSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Ammonia;
 
@@ -169,7 +169,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlyStandardAndLargeSizedChthonianWorlds(PlanetSize size)
+        public void Chthonian_CanOnlyBe_StandardAndLargeSize(PlanetSize size)
         {
             PlanetType type = PlanetType.Chthonian;
 
@@ -188,7 +188,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlySpecialAsteroidBeltWorlds(PlanetSize size)
+        public void AsteroidBelt_CanOnlyBe_SpecialSize(PlanetSize size)
         {
             PlanetType type = PlanetType.AsteroidBelt;
 
@@ -207,7 +207,7 @@ namespace GeneratorLibrary.Tests
         [InlineData(PlanetSize.Standard)]
         [InlineData(PlanetSize.Large)]
         [InlineData(PlanetSize.Special)]
-        public void CanCreateOnlySpecialGasGiantWorlds(PlanetSize size)
+        public void GasGiant_CanOnlyBe_SpecialSize(PlanetSize size)
         {
             PlanetType type = PlanetType.GasGiant;
 
