@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorLibrary.Tests", "GeneratorLibrary.Tests\GeneratorLibrary.Tests.csproj", "{D2C3280C-882B-46B0-BC57-5972590D9DFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{5E7E9B19-2476-4D17-9575-CA46A95379F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7E9B19-2476-4D17-9575-CA46A95379F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7E9B19-2476-4D17-9575-CA46A95379F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C3280C-882B-46B0-BC57-5972590D9DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C3280C-882B-46B0-BC57-5972590D9DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C3280C-882B-46B0-BC57-5972590D9DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C3280C-882B-46B0-BC57-5972590D9DFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
