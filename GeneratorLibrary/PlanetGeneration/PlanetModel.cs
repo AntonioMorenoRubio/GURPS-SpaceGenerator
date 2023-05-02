@@ -11,6 +11,9 @@ namespace GeneratorLibrary
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public PlanetType Type { get; set; }
+        public PlanetSize Size { get; set; }
+
         public PlanetModel() { }
 
         public PlanetModel(string name, string description = "")
