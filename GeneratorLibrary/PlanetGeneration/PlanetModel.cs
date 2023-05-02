@@ -18,6 +18,7 @@ namespace GeneratorLibrary
         {
             Name = name;
             Description = description;
+            WorldType = new WorldTypeModel();
         }
 
         public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
@@ -31,8 +32,13 @@ namespace GeneratorLibrary
         {
             StringBuilder sb = new StringBuilder();
 
+            //Step 1
             sb.AppendLine("Name:" + Name);
             sb.AppendLine("Description:" + Description);
+
+            //Step 2
+            sb.AppendLine($"World Type: {WorldType.Type}");
+            sb.AppendLine($"World Abstract Size: {WorldType.Size}");
 
             return sb.ToString();
         }
