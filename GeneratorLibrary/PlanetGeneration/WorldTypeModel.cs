@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace GeneratorLibrary
+﻿namespace GeneratorLibrary
 {
     public class WorldTypeModel
     {

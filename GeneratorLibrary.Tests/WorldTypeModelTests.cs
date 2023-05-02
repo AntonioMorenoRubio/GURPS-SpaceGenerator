@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace GeneratorLibrary.Tests
+﻿namespace GeneratorLibrary.Tests
 {
     public class WorldTypeModelTests
     {

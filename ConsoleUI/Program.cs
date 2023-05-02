@@ -1,8 +1,4 @@
-﻿
-
-
-
-using GeneratorLibrary;
+﻿using GeneratorLibrary;
 
 Console.WriteLine("GURPS Planet & Star System Generator");
 Console.WriteLine("=============================================================");
