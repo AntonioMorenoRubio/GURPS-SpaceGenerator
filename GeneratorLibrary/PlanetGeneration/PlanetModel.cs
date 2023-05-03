@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace GeneratorLibrary
+namespace GeneratorLibrary.PlanetGeneration
 {
     public class PlanetModel
     {

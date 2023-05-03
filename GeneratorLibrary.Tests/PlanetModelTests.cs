@@ -1,3 +1,5 @@
+using GeneratorLibrary.PlanetGeneration;
+
 namespace GeneratorLibrary.Tests
 {
     public class PlanetModelTests

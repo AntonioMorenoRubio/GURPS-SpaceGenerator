@@ -1,4 +1,6 @@
-﻿namespace GeneratorLibrary.Tests
+﻿using GeneratorLibrary.PlanetGeneration;
+
+namespace GeneratorLibrary.Tests
 {
     public class WorldTypeModelTests
     {
