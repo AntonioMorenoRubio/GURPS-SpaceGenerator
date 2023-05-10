@@ -1,4 +1,4 @@
-﻿namespace GeneratorLibrary
+﻿namespace GeneratorLibrary.PlanetGeneration.Enums
 {
     public enum PlanetType
     {

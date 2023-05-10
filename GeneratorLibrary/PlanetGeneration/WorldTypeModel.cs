@@ -1,4 +1,6 @@
-﻿namespace GeneratorLibrary.PlanetGeneration
+﻿using GeneratorLibrary.PlanetGeneration.Enums;
+
+namespace GeneratorLibrary.PlanetGeneration
 {
     public class WorldTypeModel
     {

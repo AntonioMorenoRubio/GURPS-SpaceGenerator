@@ -1,4 +1,5 @@
 ﻿using GeneratorLibrary.PlanetGeneration;
+using GeneratorLibrary.PlanetGeneration.Enums;
 
 namespace GeneratorLibrary.Tests
 {

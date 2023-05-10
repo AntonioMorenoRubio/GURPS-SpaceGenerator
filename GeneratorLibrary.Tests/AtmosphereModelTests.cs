@@ -4,6 +4,16 @@ namespace GeneratorLibrary.Tests
 {
     public class AtmosphereModelTests
     {
+        List<WorldTypeModel> worldTypes;
+
+        public AtmosphereModelTests()
+        {
+            worldTypes = new List<WorldTypeModel>()
+            {
+
+            };
+        }
+
         [Fact]
         public void CanCreateAtmosphere()
         {
@@ -11,6 +21,14 @@ namespace GeneratorLibrary.Tests
             Assert.NotNull(model);
         }
 
+
+
+        [Theory]
+        [InlineData(10)]
+        public void AssignCorrectPressureFactorBasedOnWorldType(int expectedPressure)
+        {
+
+        }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GeneratorLibrary.PlanetGeneration
+﻿namespace GeneratorLibrary.PlanetGeneration.Enums
 {
     public enum MarginalAtmosphere
     {
