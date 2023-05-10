@@ -1,4 +1,6 @@
-﻿namespace GeneratorLibrary.Tests
+﻿using GeneratorLibrary.PlanetGeneration;
+
+namespace GeneratorLibrary.Tests
 {
     public class AtmosphereModelTests
     {
@@ -8,5 +10,7 @@
             AtmosphereModel model = new AtmosphereModel();
             Assert.NotNull(model);
         }
+
+
     }
 }
