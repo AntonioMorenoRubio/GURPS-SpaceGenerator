@@ -22,7 +22,7 @@ namespace GeneratorLibrary.PlanetGeneration
         {
             Name = name;
             Description = description;
-            WorldType = new WorldTypeModel(type, size);
+            WorldType = new WorldTypeModel(size, type);
         }
 
         public override string ToString()

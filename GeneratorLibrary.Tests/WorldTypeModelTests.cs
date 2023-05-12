@@ -23,10 +23,10 @@ namespace GeneratorLibrary.Tests
             PlanetType type = PlanetType.Ice;
 
             if (size == PlanetSize.Special)
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
             else
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
         }
@@ -43,11 +43,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Tiny || size == PlanetSize.Small)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -62,11 +62,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Tiny)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -81,11 +81,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Small || size == PlanetSize.Standard)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -100,11 +100,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Standard || size == PlanetSize.Large)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -119,11 +119,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Standard || size == PlanetSize.Large)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -138,11 +138,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Standard || size == PlanetSize.Large)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -157,11 +157,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Standard || size == PlanetSize.Large)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -176,11 +176,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Standard || size == PlanetSize.Large)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -195,11 +195,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Special)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
         [Theory]
@@ -214,11 +214,11 @@ namespace GeneratorLibrary.Tests
 
             if (size == PlanetSize.Special)
             {
-                WorldTypeModel model = new WorldTypeModel(type, size);
+                WorldTypeModel model = new WorldTypeModel(size, type);
                 Assert.True(model.Type == type && model.Size == size);
             }
             else
-                Assert.Throws<ArgumentException>(() => new WorldTypeModel(type, size));
+                Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
     }

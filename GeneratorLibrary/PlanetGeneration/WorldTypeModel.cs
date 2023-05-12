@@ -12,7 +12,7 @@ namespace GeneratorLibrary.PlanetGeneration
             (Size, Type) = GenerateNewWorld(GetOverallType());
         }
 
-        public WorldTypeModel(PlanetType type, PlanetSize size)
+        public WorldTypeModel(PlanetSize size, PlanetType type)
         {
             if (CheckValidCombination(type, size))
             {

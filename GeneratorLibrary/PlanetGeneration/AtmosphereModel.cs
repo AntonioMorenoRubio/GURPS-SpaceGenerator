@@ -16,7 +16,7 @@ namespace GeneratorLibrary.PlanetGeneration
 
 
         /// <summary>
-        /// Generates the basic values of an Atmosphere based on the World Type created in Step 2. (pp.78-81)
+        /// Generates the basic values of an Atmosphere based on the steps indicated in Step 3 (pp.78-81).
         /// </summary>
         /// <param name="worldType">The World Type and Size created in Step 2.</param>
         public AtmosphereModel(WorldTypeModel worldType)
@@ -35,6 +35,21 @@ namespace GeneratorLibrary.PlanetGeneration
             if (MarginalAtmosphere != null)
                 AddMarginalEffects();
         }
+
+
+        public static bool CanHaveAtmosphere(WorldTypeModel worldType) => (worldType.Size, worldType.Type) switch
+        {
+            (PlanetSize.Small, PlanetType.Ice) => true,
+            (PlanetSize.Standard, PlanetType.Ammonia) => true,
+            (PlanetSize.Large, PlanetType.Ammonia) => true,
+            (PlanetSize.Standard, PlanetType.Ice) or (PlanetSize.Standard, PlanetType.Ocean) => true,
+            (PlanetSize.Large, PlanetType.Ice) or (PlanetSize.Large, PlanetType.Ocean) => true,
+            (PlanetSize.Standard, PlanetType.Garden) => true,
+            (PlanetSize.Large, PlanetType.Garden) => true,
+            (PlanetSize.Standard, PlanetType.Greenhouse) or (PlanetSize.Large, PlanetType.Greenhouse) => true,
+            (PlanetSize.Special, PlanetType.GasGiant) => true,
+            _ => false
+        };
 
         private void AddMarginalEffects()
         {
@@ -82,12 +97,13 @@ namespace GeneratorLibrary.PlanetGeneration
         {
             (PlanetSize.Small, PlanetType.Ice) => new List<string> { "Nitrogen", "Methane" },
             (PlanetSize.Standard, PlanetType.Ammonia) => new List<string> { "Nitrogen", "Ammonia", "Methane" },
-            (PlanetSize.Large, PlanetType.Ammonia) => new List<string> { "Helium gas", "Ammonia", "Methane" },
+            (PlanetSize.Large, PlanetType.Ammonia) => new List<string> { "Helium", "Ammonia", "Methane" },
             (PlanetSize.Standard, PlanetType.Ice) or (PlanetSize.Standard, PlanetType.Ocean) => new List<string> { "Nitrogen", "Carbon Dioxide" },
-            (PlanetSize.Large, PlanetType.Ice) or (PlanetSize.Large, PlanetType.Ocean) => new List<string> { "Helium gas", "Nitrogen gas" },
+            (PlanetSize.Large, PlanetType.Ice) or (PlanetSize.Large, PlanetType.Ocean) => new List<string> { "Helium", "Nitrogen" },
             (PlanetSize.Standard, PlanetType.Garden) => new List<string> { "Nitrogen", "Oxygen" },
             (PlanetSize.Large, PlanetType.Garden) => new List<string> { "Nitrogen", "Noble gases", "Oxygen" },
             (PlanetSize.Standard, PlanetType.Greenhouse) or (PlanetSize.Large, PlanetType.Greenhouse) => new List<string> { "Carbon Dioxide", "Nitrogen" },
+            (PlanetSize.Special, PlanetType.GasGiant) => new List<string> { "Hydrogen", "Helium" },
             _ => throw new ArgumentException($"Combination of planet size {worldType.Size} and type {worldType.Type} not found. Could not determine atmospheric composition.")
         };
 
@@ -127,6 +143,11 @@ namespace GeneratorLibrary.PlanetGeneration
                 AtmosphereCharacteristic.Suffocating,
                 AtmosphereCharacteristic.LethallyToxic,
                 AtmosphereCharacteristic.Corrosive
+            },
+            (PlanetSize.Special, PlanetType.GasGiant) => new List<AtmosphereCharacteristic>
+            {
+                AtmosphereCharacteristic.Suffocating,
+                AtmosphereCharacteristic.LethallyToxic
             },
             _ => throw new ArgumentException($"Combination of planet size {worldType.Size} and type {worldType.Type} not found. Could not determine atmosphere characteristics.")
         };
@@ -186,7 +207,5 @@ namespace GeneratorLibrary.PlanetGeneration
 
             return output;
         }
-
-
     }
 }
