@@ -33,7 +33,7 @@ namespace GeneratorLibrary.Tests
         [MemberData(nameof(DataForTests))]
         public void GeneratesValidHydrographicCoverageForWorldType(WorldTypeModel worldType, float minimumExpected, float maximumExpected)
         {
-            HydrographicCoverage coverage = new HydrographicCoverage(worldType);
+            HydrographicCoverageModel coverage = new HydrographicCoverageModel(worldType);
 
             Assert.InRange(coverage.WaterCoveragePercent, minimumExpected, maximumExpected);
         }

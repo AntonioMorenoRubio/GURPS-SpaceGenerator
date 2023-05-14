@@ -2,11 +2,11 @@
 
 namespace GeneratorLibrary.PlanetGeneration
 {
-    public class HydrographicCoverage
+    public class HydrographicCoverageModel
     {
         public bool HasLiquidWater { get; set; } = false;
         public float WaterCoveragePercent { get; set; }
-        public HydrographicCoverage(WorldTypeModel worldType)
+        public HydrographicCoverageModel(WorldTypeModel worldType)
         {
             (bool HasLiquidWater, float WaterCoverage) generated = GenerateHydrographicCoverage(worldType);
             (float Minimum, float Maximum) minimumMaximum = GetMinMaxCoveragePerWorldType(worldType);
@@ -40,7 +40,7 @@ namespace GeneratorLibrary.PlanetGeneration
             => (true, Math.Clamp(DiceRoller.RollD6(1, 6) * 0.1f, 0f, 1f)),
 
             (PlanetSize.Standard, PlanetType.Greenhouse) or (PlanetSize.Standard, PlanetType.Greenhouse)
-            => (true, Math.Clamp(DiceRoller.RollD6(2, -7) * 0.1f, 0f, 1f)),
+            => (true, Math.Clamp(DiceRoller.RollD6(2, -7) * 0.1f, 0f, 0.5f)),
 
             _ => (false, 0f)
         };

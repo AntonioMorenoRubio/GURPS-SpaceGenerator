@@ -9,7 +9,7 @@ namespace GeneratorLibrary.PlanetGeneration
         public string Description { get; set; }
         public WorldTypeModel WorldType { get; set; }
         public AtmosphereModel? Atmosphere { get; set; }
-
+        public HydrographicCoverageModel HydrographicCoverage { get; set; }
 
         public PlanetModel() { }
 
@@ -21,6 +21,8 @@ namespace GeneratorLibrary.PlanetGeneration
 
             if (AtmosphereModel.CanHaveAtmosphere(WorldType))
                 Atmosphere = new AtmosphereModel(WorldType);
+
+            HydrographicCoverage = new HydrographicCoverageModel(WorldType);
         }
 
         public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
@@ -31,6 +33,8 @@ namespace GeneratorLibrary.PlanetGeneration
 
             if (AtmosphereModel.CanHaveAtmosphere(WorldType))
                 Atmosphere = new AtmosphereModel(WorldType);
+
+            HydrographicCoverage = new HydrographicCoverageModel(WorldType);
         }
 
         public override string ToString()
@@ -77,6 +81,11 @@ namespace GeneratorLibrary.PlanetGeneration
                 }
                 sb.AppendLine();
             }
+
+            //Step 4
+            sb.AppendLine($"Hydrographic Coverage: {HydrographicCoverage.WaterCoveragePercent*100f}%");
+            sb.AppendLine($"Has liquid water on surface: {HydrographicCoverage.HasLiquidWater}");
+
             return sb.ToString();
         }
     }
