@@ -1,0 +1,114 @@
+﻿using GeneratorLibrary.PlanetGeneration.Enums;
+
+namespace GeneratorLibrary.Tests.TestData
+{
+    public class Step6KelvinToClimateTestData : TheoryData<int, ClimateType>
+    {
+        public Step6KelvinToClimateTestData()
+        {
+            Add(243, ClimateType.Frozen);
+            Add(244, ClimateType.VeryCold);
+            Add(245, ClimateType.VeryCold);
+            Add(246, ClimateType.VeryCold);
+            Add(247, ClimateType.VeryCold);
+            Add(248, ClimateType.VeryCold);
+            Add(249, ClimateType.VeryCold);
+            Add(250, ClimateType.VeryCold);
+            Add(251, ClimateType.VeryCold);
+            Add(252, ClimateType.VeryCold);
+            Add(253, ClimateType.VeryCold);
+            Add(254, ClimateType.VeryCold);
+            Add(255, ClimateType.Cold);
+            Add(256, ClimateType.Cold);
+            Add(257, ClimateType.Cold);
+            Add(258, ClimateType.Cold);
+            Add(259, ClimateType.Cold);
+            Add(260, ClimateType.Cold);
+            Add(261, ClimateType.Cold);
+            Add(262, ClimateType.Cold);
+            Add(263, ClimateType.Cold);
+            Add(264, ClimateType.Cold);
+            Add(265, ClimateType.Cold);
+            Add(266, ClimateType.Chilly);
+            Add(267, ClimateType.Chilly);
+            Add(268, ClimateType.Chilly);
+            Add(269, ClimateType.Chilly);
+            Add(270, ClimateType.Chilly);
+            Add(271, ClimateType.Chilly);
+            Add(272, ClimateType.Chilly);
+            Add(273, ClimateType.Chilly);
+            Add(274, ClimateType.Chilly);
+            Add(275, ClimateType.Chilly);
+            Add(276, ClimateType.Chilly);
+            Add(277, ClimateType.Chilly);
+            Add(278, ClimateType.Cool);
+            Add(279, ClimateType.Cool);
+            Add(280, ClimateType.Cool);
+            Add(281, ClimateType.Cool);
+            Add(282, ClimateType.Cool);
+            Add(283, ClimateType.Cool);
+            Add(284, ClimateType.Cool);
+            Add(285, ClimateType.Cool);
+            Add(286, ClimateType.Cool);
+            Add(287, ClimateType.Cool);
+            Add(288, ClimateType.Cool);
+            Add(289, ClimateType.Normal);
+            Add(290, ClimateType.Normal);
+            Add(291, ClimateType.Normal);
+            Add(292, ClimateType.Normal);
+            Add(293, ClimateType.Normal);
+            Add(294, ClimateType.Normal);
+            Add(295, ClimateType.Normal);
+            Add(296, ClimateType.Normal);
+            Add(297, ClimateType.Normal);
+            Add(298, ClimateType.Normal);
+            Add(299, ClimateType.Normal);
+            Add(300, ClimateType.Warm);
+            Add(301, ClimateType.Warm);
+            Add(302, ClimateType.Warm);
+            Add(303, ClimateType.Warm);
+            Add(304, ClimateType.Warm);
+            Add(305, ClimateType.Warm);
+            Add(306, ClimateType.Warm);
+            Add(307, ClimateType.Warm);
+            Add(308, ClimateType.Warm);
+            Add(309, ClimateType.Warm);
+            Add(310, ClimateType.Warm);
+            Add(311, ClimateType.Tropical);
+            Add(312, ClimateType.Tropical);
+            Add(313, ClimateType.Tropical);
+            Add(314, ClimateType.Tropical);
+            Add(315, ClimateType.Tropical);
+            Add(316, ClimateType.Tropical);
+            Add(317, ClimateType.Tropical);
+            Add(318, ClimateType.Tropical);
+            Add(319, ClimateType.Tropical);
+            Add(320, ClimateType.Tropical);
+            Add(321, ClimateType.Tropical);
+            Add(322, ClimateType.Hot);
+            Add(323, ClimateType.Hot);
+            Add(324, ClimateType.Hot);
+            Add(325, ClimateType.Hot);
+            Add(326, ClimateType.Hot);
+            Add(327, ClimateType.Hot);
+            Add(328, ClimateType.Hot);
+            Add(329, ClimateType.Hot);
+            Add(330, ClimateType.Hot);
+            Add(331, ClimateType.Hot);
+            Add(332, ClimateType.Hot);
+            Add(333, ClimateType.VeryHot);
+            Add(334, ClimateType.VeryHot);
+            Add(335, ClimateType.VeryHot);
+            Add(336, ClimateType.VeryHot);
+            Add(337, ClimateType.VeryHot);
+            Add(338, ClimateType.VeryHot);
+            Add(339, ClimateType.VeryHot);
+            Add(340, ClimateType.VeryHot);
+            Add(341, ClimateType.VeryHot);
+            Add(342, ClimateType.VeryHot);
+            Add(343, ClimateType.VeryHot);
+            Add(344, ClimateType.VeryHot);
+            Add(345, ClimateType.Infernal);
+        }
+    }
+}

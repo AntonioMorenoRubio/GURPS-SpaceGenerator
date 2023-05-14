@@ -113,7 +113,7 @@ namespace GeneratorLibrary.Tests
         [MemberData(nameof(GetPossibleWorldTypes))]
         public void AtmosphericMassIsAlwaysZeroOrPositive(WorldTypeModel worldType)
         {
-            Assert.True(AtmosphereModel.GenerateAtmosphericMass(worldType) >= 0f);
+            Assert.InRange(AtmosphereModel.GenerateAtmosphericMass(worldType), 0f, float.PositiveInfinity);
         }
 
         [Fact]

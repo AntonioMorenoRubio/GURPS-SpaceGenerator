@@ -1,10 +1,16 @@
 ﻿using GeneratorLibrary.PlanetGeneration;
 using GeneratorLibrary.PlanetGeneration.Enums;
+using GeneratorLibrary.Tests.TestData;
 
 namespace GeneratorLibrary.Tests
 {
     public class WorldTypeModelTests
     {
+        public static IEnumerable<object[]> WorldCombinations => ConstantData.GetAllWorldPossibleWorldCombinations().Select(w => new object[] { w });
+        public static IEnumerable<object[]> ValidWorlds => ConstantData.GetValidWorldTypes().Select(w => new object[] { w });
+        public static IEnumerable<object[]> InvalidWorlds = ConstantData.GetInvalidWorldTypes().Select(w => new object[] { w });
+
+
         [Fact]
         public void CanCreateWorldTypeModel()
         {
@@ -221,5 +227,20 @@ namespace GeneratorLibrary.Tests
                 Assert.Throws<ArgumentException>(() => new WorldTypeModel(size, type));
         }
 
+        [Theory]
+        [MemberData(nameof(ValidWorlds))]
+        public void ValidPlanetsPass(WorldTypeModel worldType)
+        {
+            bool isValidCombination = WorldTypeModel.CheckValidCombination(worldType.Type, worldType.Size);
+            Assert.True(isValidCombination);
+        }
+
+        [Theory]
+        [MemberData(nameof(InvalidWorlds))]
+        public void InvalidPlanetsPass(WorldTypeModel worldType)
+        {
+            bool isValidCombination = WorldTypeModel.CheckValidCombination(worldType.Type, worldType.Size);
+            Assert.False(isValidCombination);
+        }
     }
 }

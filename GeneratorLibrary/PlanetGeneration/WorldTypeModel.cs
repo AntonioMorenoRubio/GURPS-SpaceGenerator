@@ -99,5 +99,22 @@ namespace GeneratorLibrary.PlanetGeneration
             >= 17 and <= 18 => (PlanetSize.Large, PlanetType.Garden),
             _ => throw new Exception("Couldn't generate garden world.")
         };
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            WorldTypeModel other = (WorldTypeModel)obj;
+
+            return Size == other.Size && Type == other.Type;
+        }
+
+        public override int GetHashCode()
+        {
+            return Size.GetHashCode() ^ Type.GetHashCode();
+        }
     }
 }

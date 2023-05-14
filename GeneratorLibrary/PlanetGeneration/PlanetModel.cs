@@ -44,10 +44,12 @@ namespace GeneratorLibrary.PlanetGeneration
             //Step 1
             sb.AppendLine("Name:" + Name);
             sb.AppendLine("Description:" + Description);
+            sb.AppendLine();
 
             //Step 2
             sb.AppendLine($"World Type: {WorldType.Type}");
             sb.AppendLine($"World Abstract Size: {WorldType.Size}");
+            sb.AppendLine();
 
             //Step 3
             if (Atmosphere != null)
@@ -85,6 +87,10 @@ namespace GeneratorLibrary.PlanetGeneration
             //Step 4
             sb.AppendLine($"Hydrographic Coverage: {HydrographicCoverage.WaterCoveragePercent*100f}%");
             sb.AppendLine($"Has liquid water on surface: {HydrographicCoverage.HasLiquidWater}");
+            sb.AppendLine();
+
+            //Step 5
+
 
             return sb.ToString();
         }
