@@ -76,7 +76,7 @@ namespace GeneratorLibrary.PlanetGeneration
             float baseMass = DiceRoller.BasicRoll() % 10f;
             float variation = Random.Shared.NextSingle(-0.05f, 0.05f);
 
-            return baseMass + variation;
+            return Math.Clamp(MathF.Round(baseMass + variation, 2), 0f, float.PositiveInfinity);
         }
 
         private MarginalAtmosphere GenerateMarginalAtmosphere() => DiceRoller.BasicRoll() switch
