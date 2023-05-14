@@ -5,8 +5,8 @@ namespace GeneratorLibrary.PlanetGeneration
     public class AtmosphereModel
     {
         public float Pressure { get; set; }
-        public AtmosphericPressureCategory PressureClassification { get; set; }
-        public AtmosphericPressureCategory EffectivePressureForLife { get; set; }
+        public AtmosphericPressureCategory PressureCategory { get; set; }
+        public AtmosphericPressureCategory PressureClassFeltByLife { get; set; }
         public float Mass { get; set; }
         public MarginalAtmosphere? MarginalAtmosphere { get; set; } = null;
         public List<string> Composition { get; set; } = new List<string>();
@@ -62,7 +62,7 @@ namespace GeneratorLibrary.PlanetGeneration
                 Characteristics.Add(characteristic);
         }
 
-        private float GenerateAtmosphericMass(WorldTypeModel worldType)
+        public static float GenerateAtmosphericMass(WorldTypeModel worldType)
         {
             if (worldType.Type == PlanetType.AsteroidBelt ||
                 worldType.Size == PlanetSize.Tiny ||
@@ -179,12 +179,12 @@ namespace GeneratorLibrary.PlanetGeneration
                     output.Characteristics.Add(AtmosphereCharacteristic.MildlyToxic);
                     break;
                 case Enums.MarginalAtmosphere.HighOxygen:
-                    if (PressureClassification != AtmosphericPressureCategory.SuperDense)
-                        EffectivePressureForLife = PressureClassification + 1;
+                    if (PressureCategory != AtmosphericPressureCategory.SuperDense)
+                        PressureClassFeltByLife = PressureCategory + 1;
                     break;
                 case Enums.MarginalAtmosphere.LowOxygen:
-                    if (PressureClassification != AtmosphericPressureCategory.Trace)
-                        EffectivePressureForLife = PressureClassification - 1;
+                    if (PressureCategory != AtmosphericPressureCategory.Trace)
+                        PressureClassFeltByLife = PressureCategory - 1;
                     break;
                 case Enums.MarginalAtmosphere.NitrogenCompounds:
                     output.Composition.Add("Nitrogen Oxide");

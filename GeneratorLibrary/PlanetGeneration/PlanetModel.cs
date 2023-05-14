@@ -8,6 +8,8 @@ namespace GeneratorLibrary.PlanetGeneration
         public string Name { get; set; }
         public string Description { get; set; }
         public WorldTypeModel WorldType { get; set; }
+        public AtmosphereModel? Atmosphere { get; set; }
+
 
         public PlanetModel() { }
 
@@ -16,6 +18,9 @@ namespace GeneratorLibrary.PlanetGeneration
             Name = name;
             Description = description;
             WorldType = new WorldTypeModel();
+
+            if (AtmosphereModel.CanHaveAtmosphere(WorldType))
+                Atmosphere = new AtmosphereModel(WorldType);
         }
 
         public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
@@ -23,6 +28,9 @@ namespace GeneratorLibrary.PlanetGeneration
             Name = name;
             Description = description;
             WorldType = new WorldTypeModel(size, type);
+
+            if (AtmosphereModel.CanHaveAtmosphere(WorldType))
+                Atmosphere = new AtmosphereModel(WorldType);
         }
 
         public override string ToString()
@@ -37,6 +45,38 @@ namespace GeneratorLibrary.PlanetGeneration
             sb.AppendLine($"World Type: {WorldType.Type}");
             sb.AppendLine($"World Abstract Size: {WorldType.Size}");
 
+            //Step 3
+            if (Atmosphere != null)
+            {
+                sb.AppendLine($"Atmosphere:");
+                sb.AppendLine($"Atmospheric Pressure: {Atmosphere.Pressure}");
+                sb.AppendLine($"Pressure Category: {Atmosphere.PressureCategory}");
+                sb.AppendLine($"Pressure felt by Life: {Atmosphere.PressureClassFeltByLife}");
+                sb.AppendLine($"Mass: {Atmosphere.Mass}");
+
+                if (Atmosphere.MarginalAtmosphere != null)
+                    sb.AppendLine(Atmosphere.MarginalAtmosphere.ToString());
+
+                sb.Append("Composition: ");
+                foreach (string compound in Atmosphere.Composition)
+                {
+                    sb.Append($"{compound}, ");
+                }
+                sb.AppendLine();
+
+                sb.Append("Special Charateristics for Humans: ");
+                if (Atmosphere.Characteristics.Count > 0)
+                {
+                    foreach (AtmosphereCharacteristic characteristic in Atmosphere.Characteristics)
+                    {
+                        sb.Append($"{characteristic.ToString()}, ");
+                    }
+                } else
+                {
+                    sb.Append("None");
+                }
+                sb.AppendLine();
+            }
             return sb.ToString();
         }
     }

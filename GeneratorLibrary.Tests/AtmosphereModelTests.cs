@@ -5,6 +5,31 @@ namespace GeneratorLibrary.Tests
 {
     public class AtmosphereModelTests
     {
+        public static IEnumerable<object[]> GetPossibleWorldTypes() => new List<object[]>
+        {
+                new object[] { new WorldTypeModel(PlanetSize.Tiny, PlanetType.Rock) },
+                new object[] { new WorldTypeModel(PlanetSize.Tiny, PlanetType.Ice) },
+                new object[] { new WorldTypeModel(PlanetSize.Tiny, PlanetType.Sulfur) },
+                new object[] { new WorldTypeModel(PlanetSize.Small, PlanetType.Hadean) },
+                new object[] { new WorldTypeModel(PlanetSize.Small, PlanetType.Ice) },
+                new object[] { new WorldTypeModel(PlanetSize.Small, PlanetType.Rock) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Hadean) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Ammonia) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Ice) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Ocean) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Garden) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Greenhouse) },
+                new object[] { new WorldTypeModel(PlanetSize.Standard, PlanetType.Chthonian) },
+                new object[] { new WorldTypeModel(PlanetSize.Large, PlanetType.Ammonia) },
+                new object[] { new WorldTypeModel(PlanetSize.Large, PlanetType.Ice) },
+                new object[] { new WorldTypeModel(PlanetSize.Large, PlanetType.Ocean) },
+                new object[] { new WorldTypeModel(PlanetSize.Large, PlanetType.Garden) },
+                new object[] { new WorldTypeModel(PlanetSize.Large, PlanetType.Greenhouse) },
+                new object[] { new WorldTypeModel(PlanetSize.Large, PlanetType.Chthonian) },
+                new object[] { new WorldTypeModel(PlanetSize.Special, PlanetType.AsteroidBelt) },
+                new object[] { new WorldTypeModel(PlanetSize.Special, PlanetType.GasGiant) }
+        };
+
         List<WorldTypeModel> possibleWorldTypes = new List<WorldTypeModel>
         {
             new WorldTypeModel(PlanetSize.Tiny, PlanetType.Rock),
@@ -73,7 +98,7 @@ namespace GeneratorLibrary.Tests
         [Fact]
         public void OnlyValidWorldsCanHaveAtmosphere()
         {
-            for(int i = 0; i < possibleWorldTypes.Count; i++)
+            for (int i = 0; i < possibleWorldTypes.Count; i++)
             {
                 if (possibleWorldsWithAtmosphere.Exists(x =>
                     x.Type == possibleWorldTypes[i].Type &&
@@ -84,13 +109,20 @@ namespace GeneratorLibrary.Tests
             }
         }
 
+        [Theory]
+        [MemberData(nameof(GetPossibleWorldTypes))]
+        public void AtmosphericMassIsAlwaysZeroOrPositive(WorldTypeModel worldType)
+        {
+            Assert.True(AtmosphereModel.GenerateAtmosphericMass(worldType) >= 0f);
+        }
+
         [Fact]
         public void AssignCorrectAtmosphericCompositionBasedOnWorldType()
         {
             WorldTypeModel world;
             List<string> actualComposition, expectedComposition = new List<string>();
 
-            for(int i = 0; i < possibleWorldsWithAtmosphere.Count; i++)
+            for (int i = 0; i < possibleWorldsWithAtmosphere.Count; i++)
             {
                 world = possibleWorldsWithAtmosphere[i];
                 actualComposition = new AtmosphereModel(possibleWorldsWithAtmosphere[i]).Composition;
