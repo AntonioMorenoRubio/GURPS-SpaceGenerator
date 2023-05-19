@@ -10,6 +10,7 @@ namespace GeneratorLibrary.PlanetGeneration
         public WorldTypeModel WorldType { get; set; }
         public AtmosphereModel? Atmosphere { get; set; }
         public HydrographicCoverageModel HydrographicCoverage { get; set; }
+        public ClimateModel? Climate { get; set; }
 
         public PlanetModel() { }
 
@@ -23,6 +24,11 @@ namespace GeneratorLibrary.PlanetGeneration
                 Atmosphere = new AtmosphereModel(WorldType);
 
             HydrographicCoverage = new HydrographicCoverageModel(WorldType);
+
+            if (Atmosphere != null)
+                Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
+
+
         }
 
         public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
@@ -35,6 +41,9 @@ namespace GeneratorLibrary.PlanetGeneration
                 Atmosphere = new AtmosphereModel(WorldType);
 
             HydrographicCoverage = new HydrographicCoverageModel(WorldType);
+
+            if (Atmosphere != null)
+                Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
         }
 
         public override string ToString()
@@ -90,7 +99,14 @@ namespace GeneratorLibrary.PlanetGeneration
             sb.AppendLine();
 
             //Step 5
-
+            if (Climate != null)
+            {
+                sb.AppendLine("Climate Data:");
+                sb.AppendLine($"Climate Type: {Climate.Type}");
+                sb.AppendLine($"Average surface temperature: {Climate.CelsiusDegrees}ºC / {Climate.FarenheitDegrees}ºF / {Climate.KelvinDegrees}ºK");
+                sb.AppendLine($"Blackbody Temperature: {Climate.BlackbodyTemperature}ºK");
+                sb.AppendLine();
+            }
 
             return sb.ToString();
         }
