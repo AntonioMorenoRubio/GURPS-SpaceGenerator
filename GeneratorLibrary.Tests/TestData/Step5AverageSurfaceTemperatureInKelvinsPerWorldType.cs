@@ -3,9 +3,9 @@ using GeneratorLibrary.PlanetGeneration.Enums;
 
 namespace GeneratorLibrary.Tests.TestData
 {
-    public class Step6AverageSurfaceTemperatureInKelvinsPerWorldType : TheoryData<WorldTypeModel, int, int>
+    public class Step5AverageSurfaceTemperatureInKelvinsPerWorldType : TheoryData<WorldTypeModel, int, int>
     {
-        public Step6AverageSurfaceTemperatureInKelvinsPerWorldType()
+        public Step5AverageSurfaceTemperatureInKelvinsPerWorldType()
         {
             Add(new WorldTypeModel(PlanetSize.Special, PlanetType.AsteroidBelt), 140, 500);
             Add(new WorldTypeModel(PlanetSize.Tiny, PlanetType.Ice), 80, 140);

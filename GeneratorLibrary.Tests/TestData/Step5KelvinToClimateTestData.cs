@@ -2,9 +2,9 @@
 
 namespace GeneratorLibrary.Tests.TestData
 {
-    public class Step6KelvinToClimateTestData : TheoryData<int, ClimateType>
+    public class Step5KelvinToClimateTestData : TheoryData<int, ClimateType>
     {
-        public Step6KelvinToClimateTestData()
+        public Step5KelvinToClimateTestData()
         {
             Add(243, ClimateType.Frozen);
             Add(244, ClimateType.VeryCold);

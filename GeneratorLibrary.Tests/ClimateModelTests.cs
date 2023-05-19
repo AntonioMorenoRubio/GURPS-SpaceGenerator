@@ -33,7 +33,7 @@ namespace GeneratorLibrary.Tests
         }
 
         [Theory]
-        [ClassData(typeof(Step6AverageSurfaceTemperatureInKelvinsPerWorldType))]
+        [ClassData(typeof(Step5AverageSurfaceTemperatureInKelvinsPerWorldType))]
         public void AssignValidKelvinTemperatureBasedOnWorldTypeINFullRandomMethod(WorldTypeModel worldType, int minimum, int maximum)
         {
             int actual = ClimateModel.GenerateAverageSurfaceTemperature(worldType, GenerationMethod.FullRandom);
@@ -41,7 +41,7 @@ namespace GeneratorLibrary.Tests
         }
 
         [Theory]
-        [ClassData(typeof(Step6KelvinToClimateTestData))]
+        [ClassData(typeof(Step5KelvinToClimateTestData))]
         public void AssignCorrectClimateTypeBasedOnKelvinTemperature(int kelvinDegrees, ClimateType expected)
         {
             ClimateType actual = ClimateModel.DetermineClimateType(kelvinDegrees);
