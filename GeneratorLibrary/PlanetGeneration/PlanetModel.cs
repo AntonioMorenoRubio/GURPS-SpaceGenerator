@@ -54,7 +54,10 @@ namespace GeneratorLibrary.PlanetGeneration
             Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
 
             if (WorldType.Type is not PlanetType.AsteroidBelt)
+            {
                 WorldSize = new WorldSizeModel(WorldType, Climate.BlackbodyTemperature);
+                Atmosphere.DetermineAtmosphericPressure(WorldType, WorldSize.SurfaceGravity);
+            }
 
             Resource = new ResourceModel(WorldType.Type);
             Habitability = new HabitabilityModel(Atmosphere, HydrographicCoverage, Climate);
@@ -130,7 +133,7 @@ namespace GeneratorLibrary.PlanetGeneration
             }
 
             //Step 7
-            sb.AppendLine($"Resource Value: {Resource.Description} ({string.Concat("+", Resource.ResourceValueModifier.ToString())})");
+            sb.AppendLine($"Resource Value: {Resource.Description} ({Resource.ResourceValueModifier.ToString()})");
             sb.AppendLine($"Habitability Score: {Habitability.Score}");
             sb.AppendLine($"Affinity Score: {AffinityScore}");
             sb.AppendLine();

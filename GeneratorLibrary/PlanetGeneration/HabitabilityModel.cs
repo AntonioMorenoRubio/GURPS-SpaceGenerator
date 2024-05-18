@@ -31,6 +31,8 @@ namespace GeneratorLibrary.PlanetGeneration
                 modifiers.Add(0);
             } else
                 modifiers.Add(GetHydrographicCoverageModifier(hydrographic.WaterCoveragePercent));
+
+            Score = modifiers.Sum();
         }
 
         private int NonBreathableAtmosphere(List<AtmosphereCharacteristic> characteristics)
