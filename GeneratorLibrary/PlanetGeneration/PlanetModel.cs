@@ -16,6 +16,7 @@ namespace GeneratorLibrary.PlanetGeneration
         public HabitabilityModel Habitability { get; set; }
         public int AffinityScore { get; set; }
 
+        public PlanetModel() { }
 
         public PlanetModel(string name, string description = "")
         {
