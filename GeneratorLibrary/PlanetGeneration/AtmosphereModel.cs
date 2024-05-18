@@ -11,6 +11,7 @@ namespace GeneratorLibrary.PlanetGeneration
         public MarginalAtmosphere? MarginalAtmosphere { get; set; } = null;
         public List<string> Composition { get; set; } = new List<string>();
         public List<AtmosphereCharacteristic> Characteristics { get; set; } = new List<AtmosphereCharacteristic>();
+        public bool IsToxic { get; set; } = false;
 
         public AtmosphereModel() { }
 
@@ -34,6 +35,9 @@ namespace GeneratorLibrary.PlanetGeneration
 
             if (MarginalAtmosphere != null)
                 AddMarginalEffects();
+
+            if (Characteristics.Contains(AtmosphereCharacteristic.MildlyToxic) || Characteristics.Contains(AtmosphereCharacteristic.HighlyToxic) || Characteristics.Contains(AtmosphereCharacteristic.LethallyToxic))
+                IsToxic = true;
         }
 
 
@@ -66,8 +70,10 @@ namespace GeneratorLibrary.PlanetGeneration
         {
             if (worldType.Type == PlanetType.AsteroidBelt ||
                 worldType.Size == PlanetSize.Tiny ||
-                worldType.Size == PlanetSize.Small && (worldType.Type == PlanetType.Hadean || worldType.Type == PlanetType.Rock) ||
-                worldType.Size == PlanetSize.Standard && (worldType.Type == PlanetType.Hadean || worldType.Type == PlanetType.Chthonian) ||
+                worldType.Size == PlanetSize.Small && 
+                                (worldType.Type == PlanetType.Hadean || worldType.Type == PlanetType.Rock) ||
+                worldType.Size == PlanetSize.Standard && 
+                                (worldType.Type == PlanetType.Hadean || worldType.Type == PlanetType.Chthonian) ||
                 worldType.Size == PlanetSize.Large && worldType.Type == PlanetType.Chthonian)
             {
                 return 0f;

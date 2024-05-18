@@ -12,6 +12,8 @@ namespace GeneratorLibrary.PlanetGeneration
         public HydrographicCoverageModel HydrographicCoverage { get; set; }
         public ClimateModel? Climate { get; set; }
         public ResourceModel Resource { get; set; }
+        public HabitabilityModel Habitability { get; set; }
+        public int AffinityScore { get; set; }
 
 
         public PlanetModel() { }
@@ -31,6 +33,8 @@ namespace GeneratorLibrary.PlanetGeneration
                 Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
 
             Resource = new ResourceModel(WorldType.Type);
+            Habitability = new HabitabilityModel(Atmosphere, HydrographicCoverage, Climate);
+            AffinityScore = Resource.ResourceValueModifier + Habitability.Score;
         }
 
         public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
@@ -47,7 +51,9 @@ namespace GeneratorLibrary.PlanetGeneration
             if (Atmosphere != null)
                 Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
 
-            Resource = new ResourceModel(WorldType.Type);   
+            Resource = new ResourceModel(WorldType.Type);
+            Habitability = new HabitabilityModel(Atmosphere, HydrographicCoverage, Climate);
+            AffinityScore = Resource.ResourceValueModifier + Habitability.Score;
         }
 
         public override string ToString()
@@ -111,6 +117,20 @@ namespace GeneratorLibrary.PlanetGeneration
                 sb.AppendLine($"Blackbody Temperature: {Climate.BlackbodyTemperature}ºK");
                 sb.AppendLine();
             }
+
+            //Step 6
+
+
+            //Step 7
+            if (Resource != null)
+            {
+                sb.AppendLine($"Resource Value: {Resource.Description} ({string.Concat("+", Resource.ResourceValueModifier.ToString())}");
+            }
+            if (Habitability != null)
+            {
+                sb.AppendLine($"Habitability Score: {Habitability.Score}");
+            }
+            sb.AppendLine($"Affinity Score: {AffinityScore}");
 
             return sb.ToString();
         }
