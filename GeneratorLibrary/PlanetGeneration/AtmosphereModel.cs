@@ -13,6 +13,8 @@ namespace GeneratorLibrary.PlanetGeneration
         public List<AtmosphereCharacteristic> Characteristics { get; set; } = new List<AtmosphereCharacteristic>();
         public bool IsToxic { get; set; } = false;
 
+        public AtmosphereModel() { }
+
         /// <summary>
         /// Generates the basic values of an Atmosphere based on the steps indicated in Step 3 (pp.78-81).
         /// </summary>
