@@ -6,15 +6,12 @@ namespace GeneratorLibrary.PlanetGeneration
     {
         public float Pressure { get; set; }
         public AtmosphericPressureCategory PressureCategory { get; set; }
-        public AtmosphericPressureCategory PressureClassFeltByLife { get; set; }
+        public AtmosphericPressureCategory PressureClassFeltByHumans { get; set; }
         public float Mass { get; set; }
         public MarginalAtmosphere? MarginalAtmosphere { get; set; } = null;
         public List<string> Composition { get; set; } = new List<string>();
         public List<AtmosphereCharacteristic> Characteristics { get; set; } = new List<AtmosphereCharacteristic>();
         public bool IsToxic { get; set; } = false;
-
-        public AtmosphereModel() { }
-
 
         /// <summary>
         /// Generates the basic values of an Atmosphere based on the steps indicated in Step 3 (pp.78-81).
@@ -40,21 +37,6 @@ namespace GeneratorLibrary.PlanetGeneration
                 IsToxic = true;
         }
 
-
-        public static bool CanHaveAtmosphere(WorldTypeModel worldType) => (worldType.Size, worldType.Type) switch
-        {
-            (PlanetSize.Small, PlanetType.Ice) => true,
-            (PlanetSize.Standard, PlanetType.Ammonia) => true,
-            (PlanetSize.Large, PlanetType.Ammonia) => true,
-            (PlanetSize.Standard, PlanetType.Ice) or (PlanetSize.Standard, PlanetType.Ocean) => true,
-            (PlanetSize.Large, PlanetType.Ice) or (PlanetSize.Large, PlanetType.Ocean) => true,
-            (PlanetSize.Standard, PlanetType.Garden) => true,
-            (PlanetSize.Large, PlanetType.Garden) => true,
-            (PlanetSize.Standard, PlanetType.Greenhouse) or (PlanetSize.Large, PlanetType.Greenhouse) => true,
-            (PlanetSize.Special, PlanetType.GasGiant) => true,
-            _ => false
-        };
-
         private void AddMarginalEffects()
         {
             (List<string> Composition, List<AtmosphereCharacteristic> Characteristics) marginal = GetMarginalCompositionAndCharacteristics();
@@ -70,9 +52,9 @@ namespace GeneratorLibrary.PlanetGeneration
         {
             if (worldType.Type == PlanetType.AsteroidBelt ||
                 worldType.Size == PlanetSize.Tiny ||
-                worldType.Size == PlanetSize.Small && 
+                worldType.Size == PlanetSize.Small &&
                                 (worldType.Type == PlanetType.Hadean || worldType.Type == PlanetType.Rock) ||
-                worldType.Size == PlanetSize.Standard && 
+                worldType.Size == PlanetSize.Standard &&
                                 (worldType.Type == PlanetType.Hadean || worldType.Type == PlanetType.Chthonian) ||
                 worldType.Size == PlanetSize.Large && worldType.Type == PlanetType.Chthonian)
             {
@@ -110,7 +92,7 @@ namespace GeneratorLibrary.PlanetGeneration
             (PlanetSize.Large, PlanetType.Garden) => new List<string> { "Nitrogen", "Noble gases", "Oxygen" },
             (PlanetSize.Standard, PlanetType.Greenhouse) or (PlanetSize.Large, PlanetType.Greenhouse) => new List<string> { "Carbon Dioxide", "Nitrogen" },
             (PlanetSize.Special, PlanetType.GasGiant) => new List<string> { "Hydrogen", "Helium" },
-            _ => throw new ArgumentException($"Combination of planet size {worldType.Size} and type {worldType.Type} not found. Could not determine atmospheric composition.")
+            _ => new List<string>()
         };
 
         private List<AtmosphereCharacteristic> AssignBaseCharacteristicsBasedOnWorldType(WorldTypeModel worldType) => (worldType.Size, worldType.Type) switch
@@ -155,7 +137,7 @@ namespace GeneratorLibrary.PlanetGeneration
                 AtmosphereCharacteristic.Suffocating,
                 AtmosphereCharacteristic.LethallyToxic
             },
-            _ => throw new ArgumentException($"Combination of planet size {worldType.Size} and type {worldType.Type} not found. Could not determine atmosphere characteristics.")
+            _ => new List<AtmosphereCharacteristic>()
         };
 
         private (List<string> Composition, List<AtmosphereCharacteristic> Characteristics) GetMarginalCompositionAndCharacteristics()
@@ -184,14 +166,6 @@ namespace GeneratorLibrary.PlanetGeneration
                     output.Composition.Add("Carbon Dioxide");
                     output.Characteristics.Add(AtmosphereCharacteristic.MildlyToxic);
                     break;
-                case Enums.MarginalAtmosphere.HighOxygen:
-                    if (PressureCategory != AtmosphericPressureCategory.SuperDense)
-                        PressureClassFeltByLife = PressureCategory + 1;
-                    break;
-                case Enums.MarginalAtmosphere.LowOxygen:
-                    if (PressureCategory != AtmosphericPressureCategory.Trace)
-                        PressureClassFeltByLife = PressureCategory - 1;
-                    break;
                 case Enums.MarginalAtmosphere.NitrogenCompounds:
                     output.Composition.Add("Nitrogen Oxide");
                     output.Characteristics.Add(AtmosphereCharacteristic.MildlyToxic);
@@ -212,6 +186,108 @@ namespace GeneratorLibrary.PlanetGeneration
             }
 
             return output;
+        }
+
+        public void DetermineAtmosphericPressure(WorldTypeModel worldType, float surfaceGravity)
+        {
+            if (worldType.Type == PlanetType.AsteroidBelt ||
+                worldType.Size == PlanetSize.Tiny ||
+                worldType.Type == PlanetType.Hadean)
+            {
+                Pressure = 0f;
+                PressureCategory = AtmosphericPressureCategory.None;
+                PressureClassFeltByHumans = AtmosphericPressureCategory.None;
+            }
+            else if (worldType.Type == PlanetType.Chthonian ||
+                (worldType.Size == PlanetSize.Small && worldType.Type == PlanetType.Rock))
+            {
+                Pressure = 0.001f;
+                PressureCategory = AtmosphericPressureCategory.Trace;
+                PressureClassFeltByHumans = AtmosphericPressureCategory.Trace;
+            }
+            else
+            {
+                int pressureFactor = GetPressureFactor(worldType);
+                Pressure = Mass * pressureFactor * surfaceGravity;
+                PressureCategory = DeterminePressureCategory();
+                PressureClassFeltByHumans = DeterminePressureForHumans();
+            }
+        }
+
+        private AtmosphericPressureCategory DeterminePressureForHumans()
+        {
+            if (MarginalAtmosphere is null)
+                return PressureCategory;
+            else if (MarginalAtmosphere is Enums.MarginalAtmosphere.HighCarbonDioxide)
+                return AtmosphericPressureCategory.VeryDense;
+            else if (MarginalAtmosphere is Enums.MarginalAtmosphere.HighOxygen)
+            {
+                switch (PressureCategory)
+                {
+                    case AtmosphericPressureCategory.Trace:
+                        return AtmosphericPressureCategory.VeryThin;
+                    case AtmosphericPressureCategory.VeryThin:
+                        return AtmosphericPressureCategory.Thin;
+                    case AtmosphericPressureCategory.Thin:
+                        return AtmosphericPressureCategory.Standard;
+                    case AtmosphericPressureCategory.Standard:
+                        return AtmosphericPressureCategory.Dense;
+                    case AtmosphericPressureCategory.Dense:
+                        return AtmosphericPressureCategory.VeryDense;
+                    default:
+                        return AtmosphericPressureCategory.SuperDense;
+                }
+            }
+            else if (MarginalAtmosphere is Enums.MarginalAtmosphere.LowOxygen)
+            {
+                switch (PressureCategory)
+                {
+                    case AtmosphericPressureCategory.VeryThin:
+                        return AtmosphericPressureCategory.Trace;
+                    case AtmosphericPressureCategory.Thin:
+                        return AtmosphericPressureCategory.VeryThin;
+                    case AtmosphericPressureCategory.Standard:
+                        return AtmosphericPressureCategory.Thin;
+                    case AtmosphericPressureCategory.Dense:
+                        return AtmosphericPressureCategory.Standard;
+                    case AtmosphericPressureCategory.VeryDense:
+                        return AtmosphericPressureCategory.Dense;
+                    case AtmosphericPressureCategory.SuperDense:
+                        return AtmosphericPressureCategory.VeryDense;
+                    default:
+                        return AtmosphericPressureCategory.None;
+                }
+            }
+            else
+                return PressureCategory;
+        }
+
+        private AtmosphericPressureCategory DeterminePressureCategory() => Pressure switch
+        {
+            < 0.01f => AtmosphericPressureCategory.Trace,
+            >= 0.01f and <= 0.5f => AtmosphericPressureCategory.VeryThin,
+            > 0.5f and <= 0.8f => AtmosphericPressureCategory.Thin,
+            > 0.8f and <= 1.2f => AtmosphericPressureCategory.Standard,
+            > 1.2f and <= 1.5f => AtmosphericPressureCategory.Dense,
+            > 1.5f and <= 10f => AtmosphericPressureCategory.VeryDense,
+            > 10f => AtmosphericPressureCategory.SuperDense,
+            _ => AtmosphericPressureCategory.None
+        };
+
+        private int GetPressureFactor(WorldTypeModel worldType)
+        {
+            if (worldType.Size == PlanetSize.Small && worldType.Type == PlanetType.Ice)
+                return 10;
+            if (worldType.Size == PlanetSize.Standard && worldType.Type == PlanetType.Greenhouse)
+                return 100;
+            if (worldType.Size == PlanetSize.Standard)
+                return 1;
+            if (worldType.Size == PlanetSize.Large && worldType.Type == PlanetType.Greenhouse)
+                return 500;
+            if (worldType.Size == PlanetSize.Large)
+                return 5;
+            else
+                throw new Exception();
         }
     }
 }

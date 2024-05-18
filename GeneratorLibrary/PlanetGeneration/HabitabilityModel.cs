@@ -56,7 +56,7 @@ namespace GeneratorLibrary.PlanetGeneration
             AtmosphericPressureCategory.Thin => 2,
             AtmosphericPressureCategory.Standard or AtmosphericPressureCategory.Dense => 3,
             AtmosphericPressureCategory.VeryDense or AtmosphericPressureCategory.SuperDense => 1,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => 0
         };
 
         private int BreathableAtmosphereByClimate(ClimateType climateType) => climateType switch
@@ -64,7 +64,7 @@ namespace GeneratorLibrary.PlanetGeneration
             ClimateType.Frozen or ClimateType.VeryCold or ClimateType.VeryHot or ClimateType.Infernal => 0,
             ClimateType.Cold or ClimateType.Hot => 1,
             ClimateType.Chilly or ClimateType.Cool or ClimateType.Normal or ClimateType.Warm or ClimateType.Tropical => 2,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => 0
         };
 
 
@@ -74,7 +74,7 @@ namespace GeneratorLibrary.PlanetGeneration
             >= 0.6f and < 0.91f => 2,
             >= 0.91f and < 1f => 1,
             1f => 0,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => 0
         };
     }
 }

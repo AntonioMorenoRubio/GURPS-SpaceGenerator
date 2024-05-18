@@ -95,20 +95,6 @@ namespace GeneratorLibrary.Tests
             Assert.NotNull(model);
         }
 
-        [Fact]
-        public void OnlyValidWorldsCanHaveAtmosphere()
-        {
-            for (int i = 0; i < possibleWorldTypes.Count; i++)
-            {
-                if (possibleWorldsWithAtmosphere.Exists(x =>
-                    x.Type == possibleWorldTypes[i].Type &&
-                    x.Size == possibleWorldTypes[i].Size))
-                    Assert.True(AtmosphereModel.CanHaveAtmosphere(possibleWorldTypes[i]));
-                else
-                    Assert.False(AtmosphereModel.CanHaveAtmosphere(possibleWorldTypes[i]));
-            }
-        }
-
         [Theory]
         [MemberData(nameof(GetPossibleWorldTypes))]
         public void AtmosphericMassIsAlwaysZeroOrPositive(WorldTypeModel worldType)
