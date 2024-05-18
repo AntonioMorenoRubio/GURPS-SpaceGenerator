@@ -11,6 +11,8 @@ namespace GeneratorLibrary.PlanetGeneration
         public AtmosphereModel? Atmosphere { get; set; }
         public HydrographicCoverageModel HydrographicCoverage { get; set; }
         public ClimateModel? Climate { get; set; }
+        public ResourceModel Resource { get; set; }
+
 
         public PlanetModel() { }
 
@@ -28,7 +30,7 @@ namespace GeneratorLibrary.PlanetGeneration
             if (Atmosphere != null)
                 Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
 
-
+            Resource = new ResourceModel(WorldType.Type);
         }
 
         public PlanetModel(string name, PlanetType type, PlanetSize size, string description = "")
@@ -44,6 +46,8 @@ namespace GeneratorLibrary.PlanetGeneration
 
             if (Atmosphere != null)
                 Climate = new ClimateModel(WorldType, Atmosphere.Mass, HydrographicCoverage.WaterCoveragePercent);
+
+            Resource = new ResourceModel(WorldType.Type);   
         }
 
         public override string ToString()
